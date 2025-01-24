@@ -2,10 +2,10 @@ import Config
 
 # Configure your database
 config :prueba_tecnica, PruebaTecnica.Core.Infrastructure.Repo,
-  username: "root",
-  password: "root",
-  hostname: "localhost",
-  port: 3306,
+  username: System.get_env("USERNAME_DB") || "root",
+  password: System.get_env("PASSWORD_DB") || "root",
+  hostname: System.get_env("HOST_DB") || "localhost",
+  port: System.get_env("PORT_DB") || 3306,
   database: "prueba_tecnica_dev",
   stacktrace: true,
   priv: "lib/prueba_tecnica/core/infrastructure",
