@@ -14,10 +14,13 @@ defmodule PruebaTecnicaWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", PruebaTecnicaWeb do
-    pipe_through :browser
+  scope "/api", PruebaTecnicaWeb do
+    pipe_through :api
 
-    get "/", PageController, :home
+    post "/tenants", TenantController, :create
+    get "/tenants", TenantController, :index
+    delete "/tenants/:tenant_id", TenantController, :delete
+    patch "/tenants/:id", TenantController, :update
   end
 
   # Other scopes may use custom stacks.
