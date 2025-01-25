@@ -16,7 +16,7 @@ Ademas de tener MySQL.
 
 ## Acceso a la base de datos
 
-Para poder hacer que el proyecto acceda a la base de datos, tiene que modificar las siguientes lines 
+Para poder hacer que el proyecto acceda a la base de datos, tiene que modificar las siguientes lineas en el archivo config/dev.exs y config/test.exs 
 
 ```ex
   username: System.get_env("USERNAME_DB") || "root",
