@@ -12,6 +12,8 @@ Para poder ejecutar este proyecto, necesitas tener instaladas las siguientes ver
 - **Erlang**: ~> 24 (recomendado)
 - **Phoenix**: ~> 1.7.14
 
+Ademas de tener MYSQL.
+
 ## Estructura del Proyecto
 
 El proyecto está organizado en los siguientes directorios y módulos:
