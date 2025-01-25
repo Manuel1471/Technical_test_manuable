@@ -4,7 +4,15 @@ defmodule PruebaTecnica.Core.Interfaces.Repositories.TenantEntity do
   alias PruebaTecnica.Core.Infrastructure.Repo
   alias PruebaTecnica.Core.Tenants.Tenant
 
-   @doc """
+  @doc """
+  Obtiene todos los inquilinos (tenants).
+  """
+  def list_tenant() do
+    query = from t in Tenant, select: %{id: t.id, name: t.name}
+    Repo.all(query)
+  end
+
+  @doc """
   Obtiene todos los nombres de los inquilinos (tenants).
   """
   def list_tenant_names() do

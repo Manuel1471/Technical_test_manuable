@@ -7,8 +7,9 @@ defmodule PruebaTecnica.Core.Authorization.Role do
 
   schema "roles" do
     field :name, :string
-    belongs_to :tenant, PruebaTecnica.Core.Tenancy.Tenant  # Relación con Tenant
-    many_to_many :users, PruebaTecnica.Core.Accounts.User, join_through: "user_roles"  # Relación con Users
+    field :description, :string
+    belongs_to :tenant, PruebaTecnica.Core.Tenants.Tenant  # Relación con Tenant
+    many_to_many :users, PruebaTecnica.Core.Account.User, join_through: "user_roles"  # Relación con Users
     many_to_many :permissions, PruebaTecnica.Core.Authorization.Permission, join_through: "role_permissions"  # Relación con Permissions
 
     timestamps()  # Campos inserted_at y updated_at
@@ -19,7 +20,7 @@ defmodule PruebaTecnica.Core.Authorization.Role do
   """
   def changeset(role, attrs) do
     role
-    |> cast(attrs, [:name, :tenant_id])
+    |> cast(attrs, [:name, :tenant_id, :description])
     |> validate_required([:name, :tenant_id])
     |> unique_constraint(:name, name: :roles_name_tenant_id_index)  # El nombre debe ser único por tenant
   end

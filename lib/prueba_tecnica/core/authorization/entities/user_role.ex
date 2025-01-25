@@ -6,7 +6,7 @@ defmodule PruebaTecnica.Core.Authorization.UserRole do
   @foreign_key_type :id  # Usar :id (entero) para claves foráneas
 
   schema "user_roles" do
-    belongs_to :user, PruebaTecnica.Core.Accounts.User
+    belongs_to :user, PruebaTecnica.Core.Account.User
     belongs_to :role, PruebaTecnica.Core.Authorization.Role
 
     timestamps()  # Campos inserted_at y updated_at

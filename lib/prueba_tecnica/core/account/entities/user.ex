@@ -1,4 +1,4 @@
-defmodule PruebaTecnica.Core.Accounts.User do
+defmodule PruebaTecnica.Core.Account.User do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -9,7 +9,7 @@ defmodule PruebaTecnica.Core.Accounts.User do
     field :name, :string
     field :email, :string
     field :password_hash, :string
-    belongs_to :tenant, PruebaTecnica.Core.Tenancy.Tenant  # Relación con Tenant
+    belongs_to :tenant, PruebaTecnica.Core.Tenants.Tenant  # Relación con Tenant
     many_to_many :roles, PruebaTecnica.Core.Authorization.Role, join_through: "user_roles"  # Relación con Roles
 
     timestamps()  # Campos inserted_at y updated_at
