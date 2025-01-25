@@ -16,7 +16,7 @@ Ademas de tener MySQL.
 
 ## Acceso a la base de datos
 
-Para poder hacer que el proyecto acceda a la base de datos, tiene que modificar las siguientes lineas en el archivo config/dev.exs y config/test.exs 
+Para poder hacer que el proyecto acceda a la base de datos, tiene que modificar las siguientes lineas en el archivo config/dev.exs y config/test.exs para que coincidan con sus credenciales, estas son unas de prueba.
 
 ```ex
   username: System.get_env("USERNAME_DB") || "root",
@@ -24,6 +24,17 @@ Para poder hacer que el proyecto acceda a la base de datos, tiene que modificar 
   hostname: System.get_env("HOST_DB") || "localhost",
   port: System.get_env("PORT_DB") || 3306,
 ```
+
+Deberia quedar algo asi:
+
+```ex
+  username: System.get_env("USERNAME_DB") || "user",
+  password: System.get_env("USERNAME_DB") || "password",
+  hostname: System.get_env("USERNAME_DB") || "localhost",
+  port: System.get_env("USERNAME_DB") || 3306,
+```
+
+Aspectos a mejorar, agregar las variables de entorno desde el .env
 
 ## Estructura del Proyecto
 
