@@ -33,8 +33,8 @@ Deberia quedar algo asi:
   hostname: System.get_env("USERNAME_DB") || "localhost",
   port: System.get_env("USERNAME_DB") || 3306,
 ```
-
-Aspectos a mejorar, agregar las variables de entorno desde el .env
+Nota:
+  - Aspectos a mejorar, agregar las variables de entorno desde el .env
 
 ## Estructura del Proyecto
 
