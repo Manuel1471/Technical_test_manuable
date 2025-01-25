@@ -12,7 +12,18 @@ Para poder ejecutar este proyecto, necesitas tener instaladas las siguientes ver
 - **Erlang**: ~> 24 (recomendado)
 - **Phoenix**: ~> 1.7.14
 
-Ademas de tener MYSQL.
+Ademas de tener MySQL.
+
+## Acceso a la base de datos
+
+Para poder hacer que el proyecto acceda a la base de datos, tiene que modificar las siguientes lines 
+
+```ex
+  username: System.get_env("USERNAME_DB") || "root",
+  password: System.get_env("PASSWORD_DB") || "root",
+  hostname: System.get_env("HOST_DB") || "localhost",
+  port: System.get_env("PORT_DB") || 3306,
+```
 
 ## Estructura del Proyecto
 
