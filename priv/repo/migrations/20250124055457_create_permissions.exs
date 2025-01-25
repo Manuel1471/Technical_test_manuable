@@ -4,6 +4,7 @@ defmodule PruebaTecnica.Core.Infrastructure.Repo.Migrations.CreatePermissions do
   def change do
     create table(:permissions) do
       add :name, :string, null: false
+      add :description, :string, null: true
       add :tenant_id, references(:tenants, on_delete: :delete_all), null: false
       timestamps()
     end

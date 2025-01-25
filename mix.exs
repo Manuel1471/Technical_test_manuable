@@ -37,7 +37,6 @@ defmodule PruebaTecnica.MixProject do
       {:ecto_sql, "~> 3.10"},
       {:myxql, ">= 0.0.0"},
       {:phoenix_html, "~> 4.1"},
-      {:guardian, "~> 2.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       # TODO bump on release to {:phoenix_live_view, "~> 1.0.0"},
       {:phoenix_live_view, "~> 1.0.0-rc.1", override: true},
@@ -56,6 +55,8 @@ defmodule PruebaTecnica.MixProject do
       {:finch, "~> 0.13"},
       {:telemetry_metrics, "~> 1.0"},
       {:telemetry_poller, "~> 1.0"},
+      {:joken, "~> 2.6"},
+      {:pbkdf2_elixir, "~> 2.0"},
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
@@ -71,7 +72,7 @@ defmodule PruebaTecnica.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "ecto.setup", "assets.setup", "assets.build"],
+      setup: ["deps.get", "ecto.setup"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],

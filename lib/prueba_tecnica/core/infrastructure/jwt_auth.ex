@@ -1,43 +1,44 @@
-defmodule PruebaTecnica.Infrastructure.JwtAuth do
-  use Guardian, otp_app: :prueba_tecnica
+defmodule PruebaTecnica.Core.Infrastructure.JwtAuth do
+  @moduledoc """
+  Módulo para manejar la generación y verificación de tokens JWT usando Joken.
+  """
 
-  alias PruebaTecnica.Core.Accounts.User
-  alias PruebaTecnica.Core.Infrastructure.Repo
+  alias Joken.Signer
+
+  # Obtén la configuración desde config.ex
+  @default_signer Keyword.fetch!(Application.compile_env(:prueba_tecnica, :joken), :default_signer)
+
+  # Crea el signer directamente
+  @signer Signer.create("HS256", @default_signer)
 
   @doc """
   Genera un token JWT para un usuario.
   """
-  def generate_token(user) do
-    {:ok, token, _claims} = encode_and_sign(user)
+  def generate_token(user_id, tenant_id, roles) do
+    # Configura los claims del token
+    claims = %{
+      "user_id" => user_id,
+      "tenant_id" => tenant_id,
+      "roles" => roles,  # Incluye el rol en el token
+      "exp" => System.system_time(:second) + 7200  # Expira en 2 horas
+    }
+
+    # Genera el token firmado
+    {:ok, token, _claims} = Joken.generate_and_sign(%{}, claims, @signer)
     token
   end
 
   @doc """
-  Verifica un token JWT y devuelve el usuario asociado.
+  Verifica un token JWT y devuelve los claims si es válido.
   """
   def verify_token(token) do
-    case decode_and_verify(token) do
+    # Verifica el token y decodifica los claims
+    case Joken.verify_and_validate(%{}, token, @signer) do
       {:ok, claims} ->
-        user_id = claims["sub"]  # El ID del usuario está en el claim "sub"
-        Repo.get(User, user_id)
+        {:ok, claims}
 
-      {:error, _reason} ->
-        nil
+      {:error, reason} ->
+        {:error, reason}
     end
-  end
-
-  @doc """
-  Callback para obtener el subject (ID del usuario) desde el recurso (usuario).
-  """
-  def subject_for_token(user, _claims) do
-    {:ok, to_string(user.id)}
-  end
-
-  @doc """
-  Callback para obtener el recurso (usuario) desde el subject (ID del usuario).
-  """
-  def resource_from_claims(claims) do
-    user_id = claims["sub"]
-    Repo.get(User, user_id)
   end
 end

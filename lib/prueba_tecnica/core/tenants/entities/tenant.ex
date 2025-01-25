@@ -9,7 +9,7 @@ defmodule PruebaTecnica.Core.Tenants.Tenant do
     field :name, :string  # Nombre del inquilino
 
     # Relaciones
-    has_many :users, PruebaTecnica.Core.Accounts.User
+    has_many :users, PruebaTecnica.Core.Account.User
     has_many :roles, PruebaTecnica.Core.Authorization.Role
     has_many :permissions, PruebaTecnica.Core.Authorization.Permission
 

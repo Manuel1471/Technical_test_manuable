@@ -1,6 +1,6 @@
 defmodule PruebaTecnicaWeb.TenantController do
   use PruebaTecnicaWeb, :controller
-  alias PruebaTecnica.Core.Tenancy.UseCases.UseCasesTenants
+  alias PruebaTecnica.Core.Tenants.UseCases.UseCasesTenants
 
   @doc """
   Crea un nuevo tenant.
@@ -26,7 +26,7 @@ defmodule PruebaTecnicaWeb.TenantController do
   Lista todos los nombres de los tenants.
   """
   def index(conn, _params) do
-    case UseCasesTenants.get_tenant_names() do
+    case UseCasesTenants.get_tenants() do
       {:ok, tenants} ->
         conn
           |> put_status(:ok)  # Código 200
@@ -35,6 +35,7 @@ defmodule PruebaTecnicaWeb.TenantController do
       {:error, nil} ->
         conn
           |> put_status(:no_content)  # Código 204
+          |> json(%{message: "There are not tenants"})
       _ ->
         conn
           |> put_status(:internal_server_error) #Codigo 500
@@ -84,11 +85,16 @@ defmodule PruebaTecnicaWeb.TenantController do
   end
 
   # Función auxiliar para transformar errores de changeset a un formato amigable
-  defp transform_changeset_errors(changeset) do
-    Ecto.Changeset.traverse_errors(changeset, fn {msg, opts} ->
-      Enum.reduce(opts, msg, fn {key, value}, acc ->
-        String.replace(acc, "%{#{key}}", to_string(value))
-      end)
+  defp transform_changeset_errors(%Ecto.Changeset{} = changeset) do
+    changeset.errors
+    |> Enum.map(fn {field, {message, _opts}} ->
+      {field, message}
     end)
+    |> Enum.into(%{})
+  end
+
+  # Función para otros errores
+  defp transform_changeset_errors(error) do
+    error
   end
 end

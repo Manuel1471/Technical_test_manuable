@@ -61,12 +61,8 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-
-# Use Guardian to handle authentication and authorization based on JSON Web Tokens (JWT).
-config :prueba_tecnica, PruebaTecnica.Guardian,
-  issuer: "prueba_tecnica",  # Nombre de la aplicación
-  secret_key: System.get_env("GUARDIAN_SECRET_KEY") || "tu_clave_secreta_generada",  # Clave secreta para firmar los tokens
-  ttl: {30, :days}
+config :prueba_tecnica, :joken,
+  default_signer: System.get_env("SECRET_KEY") || "test_secret_key_1234567890"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

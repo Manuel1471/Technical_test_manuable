@@ -1,4 +1,4 @@
-defmodule PruebaTecnica.Core.Tenancy.UseCases.UseCasesTenants do
+defmodule PruebaTecnica.Core.Tenants.UseCases.UseCasesTenants do
    @moduledoc """
   Módulo que encapsula la lógica de negocio relacionada con los inquilinos (tenants).
   """
@@ -8,8 +8,8 @@ defmodule PruebaTecnica.Core.Tenancy.UseCases.UseCasesTenants do
   @doc """
   Obtiene una lista de nombres de inquilinos (tenants).
   """
-  def get_tenant_names do
-    case TenantEntity.list_tenant_names() do
+  def get_tenants do
+    case TenantEntity.list_tenant() do
       [] -> {:error, nil}
       tenants -> {:ok, tenants}
     end

@@ -8,7 +8,6 @@ config :prueba_tecnica, PruebaTecnica.Core.Infrastructure.Repo,
   port: System.get_env("PORT_DB") || 3306,
   database: "prueba_tecnica_dev",
   stacktrace: true,
-  priv: "lib/prueba_tecnica/core/infrastructure",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
