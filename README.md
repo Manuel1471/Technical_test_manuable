@@ -2,7 +2,7 @@
 
 Este proyecto es una aplicación desarrollada en Elixir que sigue una arquitectura limpia y modular. La estructura del proyecto está diseñada para separar las responsabilidades y facilitar el mantenimiento y la escalabilidad.
 
-Si se gusta ver los pasos para crear el proyecto, se uso [Trello](https://trello.com/b/GhpC3gHM/prueba-tecnica-manuable) para separar las tareas
+Si se gusta ver los pasos para crear el proyecto, se uso [Trello](https://trello.com/b/GhpC3gHM/prueba-tecnica-manuable) para separar las tareas y dejar el diagrama entidad - relacion para el diseño de la base de datos.
 
 ## Requisitos
 
